@@ -21,11 +21,11 @@ trace.set_tracer_provider(trace_provider)
 
 @app.route("/")
 def index():
-    return "Halo dari aplikasi sederhana!"
+    return "Hallo World!"
 
 @app.route("/test")
 def test():
-    return "Ini endpoint test."
+    return "This is endpoint test."
 
 if __name__ == "__main__":
     app.run(port=5000)
