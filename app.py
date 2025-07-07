@@ -21,7 +21,7 @@ trace.set_tracer_provider(trace_provider)
 
 @app.route("/")
 def index():
-    return "Hallo World!"
+    return "Hello World!"
 
 @app.route("/test")
 def test():
