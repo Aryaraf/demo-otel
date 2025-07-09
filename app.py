@@ -5,15 +5,13 @@ from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 
-# Setup Flask
 app = Flask(__name__)
 FlaskInstrumentor().instrument_app(app)
 
-# Setup OpenTelemetry Tracer
 trace_provider = TracerProvider(
     resource = Resource.create({"service.name": "flask-app"})
 )
-otlp_exporter = OTLPSpanExporter(endpoint="http://localhost:4318/v1/traces")  # ke Jaeger
+otlp_exporter = OTLPSpanExporter(endpoint="http://localhost:4318/v1/traces")  
 span_processor = BatchSpanProcessor(otlp_exporter)
 trace_provider.add_span_processor(span_processor)
 from opentelemetry import trace
