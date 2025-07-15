@@ -1,5 +1,5 @@
 from flask import Flask
-
+import time
 from opentelemetry import trace
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from opentelemetry.sdk.trace import TracerProvider
