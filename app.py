@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import request
 import time
 from opentelemetry import trace
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
@@ -31,9 +32,12 @@ def test():
 
 @app.route("/span")
 def span():
-    with tracer.start_as_current_span("simulate-processing"):
-        time.sleep(1.2)
-    return "Hello from span"
+    with trace.get_tracer(__name__).start_as_current_span("simulated-processing") as span:
+        span.set_attribute("user.id", "1234")
+        span.set_attribute("opertaion.type", "simulated-task")
+        span.set_attribute("status", "running")
+        time.sleep(1)
+    return "Span with attribute has been sent"
 
 if __name__ == "__main__":
     app.run(port=5000)
